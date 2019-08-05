@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>SEATTLE PHOTO</title>
+        <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
+    </head>
+
+    <body>
+        <h1 class="highlight">SEATTLE</h1>
+
+        <div class="controls">
+
+            <label for="spaceing">Spacing</label>
+            <input id="spacing" type="range" name="spacing" min="10" max="200" value="10" data-sizing="px">
+
+            <label for="sepia">Sepia</label>
+            <input id="sepia" type="range" name="sepia" min="0" max="1" value="0.2">
+            <!--Need to figure out how to assign gradually sepia.-->
+
+            <label for="base">Base Color</label>
+            <input id="base" type="color" name="base" value="#ffc600">
+        </div>
+
+        <img src="https://di735fsgy6skn.cloudfront.net/media/image/s/e/xseattle.jpg.pagespeed.ic.dyJjEhmAh3.jpg">
+
+
+        <style>
+            :root {
+                --spacing: 10px;
+                --sepia: 0;
+                --base: #ffc600;
+            }
+
+            img {
+                padding: var(--spacing);
+                filter: sepia(var(--sepia));
+                background: var(--base);
+            }
+
+            body {
+                text-align: center;
+                background:#1B2631;
+                font-family: 'Permanent Marker', cursive; 
+                color: antiquewhite;
+                font-weight: 100;
+                font-size: 40px;
+            }
+
+            .highlight {
+                color: var(--base);
+            }
+
+            .controls {
+                margin: 50px;
+            }
+
+            input{
+                width: 100px;
+            }
+
+            input[type="range" i] {
+                cursor: pointer;
+            }
+
+        </style>
+
+        <script>
+            const inputs = document.querySelectorAll('.controls input');
+
+            function handleUpdate() {
+                const suffix = this.dataset.sizing || '';
+                document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+            }
+
+            inputs.forEach(input => input.addEventListener('change', handleUpdate));
+            inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
+        
+        </script>
+    </body>
+</html>
